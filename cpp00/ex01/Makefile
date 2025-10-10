@@ -1,7 +1,8 @@
 NAME = PhoneBook
 FLAGS = -Wall -Werror -Wextra -std=c++98
-FILES = PhoneBook \
-		Utils \
+FILES = main \
+		BookObject \
+		ContactObject \
 
 SRC = $(addsuffix .cpp, $(FILES))
 OBJ = $(addsuffix .o, $(FILES))

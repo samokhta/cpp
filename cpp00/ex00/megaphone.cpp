@@ -11,15 +11,11 @@ void    print_args(int argc, char **argv)
     while (i < argc)
     {
         curr_arg = argv[i];
-        if (curr_arg.find(' ') == 0)
-            curr_arg.erase(0, curr_arg.find_first_not_of(' '));
-        if (curr_arg.find_last_of(' ') == curr_arg.length() - 1)
-            curr_arg.erase(curr_arg.find_last_not_of(' ') + 1, curr_arg.length());
         std::transform(curr_arg.begin(), curr_arg.end(), curr_arg.begin(), ::toupper);
-        std::cout << curr_arg << ' ';
+        std::cout << curr_arg;
         i++;
     }
-    std::cout << '\n';
+    std::cout << std::endl;
 }
 
 int main(int argc, char **argv)
