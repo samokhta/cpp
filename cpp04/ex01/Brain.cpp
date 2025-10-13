@@ -4,6 +4,8 @@
 Brain::Brain(void)
 {
     std::cout << "Brain: Default constructor called" << std::endl;
+    for (int i = 0; i < 100; ++i)
+        ideas[i] = "Empty"; 
     return ;
 }
 
@@ -11,7 +13,11 @@ Brain::Brain(void)
 Brain::Brain(const Brain &other)
 {
     std::cout << "Brain: Copy constructor called" << std::endl;
-    *this = other;
+    if (this != &other)
+    {
+        for (int i = 0; i < 100; ++i)
+            this->ideas[i] = other.ideas[i];
+    }
     return ;
 }
 
@@ -32,4 +38,18 @@ Brain::~Brain(void)
 {
     std::cout << "Brain: Destructor called" << std::endl;
     return ;
+}
+
+void    Brain::setIdea(int index, const std::string newIdea)
+{
+    if (index >= 0 && index <= 100)
+        ideas[index] = newIdea;
+}
+
+std::string Brain::getIdea(int index) const
+{
+    if (index >= 0 && index <= 100)
+        return ideas[index];
+    else
+        return NULL;
 }

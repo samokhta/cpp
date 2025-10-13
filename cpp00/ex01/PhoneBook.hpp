@@ -1,33 +1,20 @@
 # ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-#include <iostream>
-#include <iomanip>
-#include <list>
-#include <limits>
+#include "Contact.hpp"
 
-class	ContactObject
+class PhoneBook
 {
 	public:
-		std::string	FirstName;
-		std::string	LastName;
-		std::string	Nickname;
-		std::string	Secret;
-		std::string	PhoneNumber;
-};
-
-class BookObject
-{
-	public:
-		BookObject(void);
+		PhoneBook(void);
 		void	addCommand(void);
 		void	searchCommand(void);
 		
 		private:
 		int							_nbContacts;
-		std::list<ContactObject>	_Contact;
+		std::list<Contact>	_Contact;
 
-		void	printLine(ContactObject Contact, int i);
+		void	printLine(Contact Contact, int i);
 		void	printContact(int index);
 		void	searchPrompt(void);
 		

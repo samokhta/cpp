@@ -5,6 +5,7 @@ Cat::Cat(void)
 {
     std::cout << "Cat: Default constructor called" << std::endl;
 	type = "Cat";
+    catBrain = new Brain();
     return ;
 }
 
@@ -12,7 +13,8 @@ Cat::Cat(void)
 Cat::Cat(const Cat &other): Animal(other)
 {
     std::cout << "Cat: Copy constructor called" << std::endl;
-    *this = other;
+    this->catBrain = new Brain(*(other.catBrain));
+    this->type = other.type;
     return ;
 }
 
@@ -20,7 +22,8 @@ Cat::Cat(const Cat &other): Animal(other)
 Cat &Cat::operator=(const Cat &other)
 {
     std::cout << "Cat: Assignment operator called" << std::endl;
-    (void) other;
+    this->catBrain = new Brain(*(other.catBrain));
+    this->type = other.type;
     return (*this);
 }
 
@@ -28,6 +31,7 @@ Cat &Cat::operator=(const Cat &other)
 Cat::~Cat(void)
 {
     std::cout << "Cat: Destructor called" << std::endl;
+    delete catBrain;
     return ;
 }
 
@@ -39,4 +43,17 @@ void	Cat::makeSound() const
 std::string	Cat::getType() const
 {
 	return type;
+}
+
+void    Cat::setIdea(int index, const std::string newIdea)
+{
+    catBrain->setIdea(index, newIdea);
+}
+
+std::string Cat::getIdea(int index) const
+{
+    std::string idea;
+
+    idea = catBrain->getIdea(index);
+    return (idea);
 }

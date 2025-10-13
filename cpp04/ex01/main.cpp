@@ -1,36 +1,37 @@
-#include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
-#include "Brain.hpp"
 
 int	main()
 {
-	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
-	const WrongAnimal* wMeta = new WrongAnimal();
-	const WrongAnimal* wCat = new WrongCat();
 
-	std::cout << "----------------------------------------------------" << std::endl;
-	std::cout << meta->getType() << " " << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << wMeta->getType() << " " << std::endl;
-	std::cout << wCat->getType() << " " << std::endl;
-	std::cout << "----------------------------------------------------" << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
-	wMeta->makeSound();
-	wCat->makeSound();
-	std::cout << "----------------------------------------------------" << std::endl;
-
-	delete meta;
-	delete i;
 	delete j;
-	delete wMeta;
-	delete wCat;
-	return (0);
+	delete i;
+	std::cout << "----------" << std::endl;
+
+	int	nbr = 4;
+
+	Animal* Animals[nbr];
+
+	for (int i = 0; i != nbr; i++)
+	{
+		if ((i % 2) == 0)
+			Animals[i] = new Dog();
+		else
+			Animals[i] = new Cat();
+	}
+
+	// Example: Accessing Dog/Cat member functions via dynamic_cast
+	for (int i = 0; i < nbr; ++i)
+	{
+		if (Dog* dog = dynamic_cast<Dog*>(Animals[i]))
+			dog->setIdea(3, "play with ball"); // Replace with actual Dog member function
+		else if (Cat* cat = dynamic_cast<Cat*>(Animals[i]))
+			cat->setIdea(8, "take a nap"); // Replace with actual Cat member function
+	}
+
+	// Don't forget to delete allocated memory
+	for (int i = 0; i < nbr; ++i)
+		delete Animals[i];
 }

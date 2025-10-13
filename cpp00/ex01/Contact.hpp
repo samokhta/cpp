@@ -1,13 +1,12 @@
-#ifndef CONTACTOBJECT_HPP
-# define CONTACTOBJECT_HPP
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 #include <iostream>
 #include <iomanip>
-#include <list>
-#include <limits>
 #include <sstream>
+#include <limits>
 
-class	ContactObject
+class	Contact
 {
 	private:
 		std::string	FirstName;

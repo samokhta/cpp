@@ -4,8 +4,7 @@ FILES = main \
 		Animal \
 		Cat \
 		Dog \
-		WrongAnimal \
-		WrongCat \
+		Brain \
 
 SRC = $(addsuffix .cpp, $(FILES))
 OBJ = $(addsuffix .o, $(FILES))

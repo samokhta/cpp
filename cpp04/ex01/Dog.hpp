@@ -13,6 +13,8 @@ class Dog : public Animal
         virtual ~Dog();
 		virtual void	makeSound() const;
 		virtual std::string	getType() const;
+        void    setIdea(int index, const std::string newIdea);
+        std::string getIdea(int index) const;
 	private:
 		Brain*	dogBrain;
 };
