@@ -75,7 +75,7 @@ void	PhoneBook::searchPrompt(void)
 
 void	PhoneBook::addCommand()
 {
-	Contact	newContact;
+	Contact	newContact();
     std::string		input;
 
     while (1)
@@ -102,7 +102,6 @@ void	PhoneBook::addCommand()
         else
             continue ;
     }
-
     while (1)
     {
         std::cout << "Enter nickname: ";
@@ -115,7 +114,6 @@ void	PhoneBook::addCommand()
         else
             continue ;
     }
-
     while (1)
     {
         std::cout << "Enter your darkest secret....: ";
@@ -128,7 +126,6 @@ void	PhoneBook::addCommand()
         else
             continue ;
     }
-
     while (1)
     {
         std::cout << "Enter phone number: ";
@@ -141,18 +138,15 @@ void	PhoneBook::addCommand()
         else
             continue ;
     }
-
-	this->_Contact.push_front(newContact);
 	if (this->_nbContacts < 8)
 		this->_nbContacts++;
 	else
-		this->_Contact.pop_back();
+		this->popBack();
+	this->_bookArray[7 - _nbContacts] = newContact();
 }
 
 void	PhoneBook::searchCommand(void)
 {
-	std::list<Contact>			contactList;
-	std::list<Contact>::iterator	itr;
 	int									i;
 
 	if (this->_nbContacts == 0)
@@ -160,8 +154,6 @@ void	PhoneBook::searchCommand(void)
 		std::cout << "No contacts found !" << std::endl;
 		return ;
 	}
-	contactList = this->_Contact;
-	itr = contactList.begin();
 	i = 1;
 	std::cout << std::endl << "     index|First name| Last name|  Nickname" << std::endl;
 	std::cout << "__________|__________|__________|__________" << std::endl;
@@ -174,4 +166,15 @@ void	PhoneBook::searchCommand(void)
 	std::cout << "__________|__________|__________|__________|" << std::endl << std::endl;
 	searchPrompt();
 	return ;
+}
+
+void	PhoneBook::popBack(void)
+{
+	Contact	temp(this->_bookArray[0]);
+
+	for (int i = 0; i < 8; i++)
+	{
+		
+	}
+	
 }

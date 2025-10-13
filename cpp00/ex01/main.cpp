@@ -1,10 +1,9 @@
-#include "BookObject.hpp"
-#include "ContactObject.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
     std::string	command;
-	BookObject	PhoneBook;
+	PhoneBook	book;
 
 	while (1)
 	{
@@ -15,9 +14,9 @@ int main()
 		if (command == "EXIT")
 			break ;
 		if (command == "ADD")
-			PhoneBook.addCommand();
+			book.addCommand();
 		if (command == "SEARCH")
-			PhoneBook.searchCommand();
+			book.searchCommand();
 	}
 	std::cout << "Exiting..." << std::endl;
 	return (0);

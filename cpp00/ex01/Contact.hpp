@@ -4,17 +4,18 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-#include <limits>
 
 class	Contact
 {
 	private:
-		std::string	FirstName;
-		std::string	LastName;
-		std::string	Nickname;
-		std::string	Secret;
-		std::string	PhoneNumber;
+		std::string	_firstName;
+		std::string	_lastName;
+		std::string	_nickname;
+		std::string	_secret;
+		std::string	_phoneNumber;
 	public:
+		Contact();
+		Contact(Contact &other);
 		std::string	getFirstName();
 		std::string	getLastName();
 		std::string	getNickname();

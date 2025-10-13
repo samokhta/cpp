@@ -10,13 +10,14 @@ class PhoneBook
 		void	addCommand(void);
 		void	searchCommand(void);
 		
-		private:
+	private:
 		int							_nbContacts;
-		std::list<Contact>	_Contact;
+		Contact						_bookArray[8];
 
-		void	printLine(Contact Contact, int i);
+		void	printLine(Contact toPrint, int i);
 		void	printContact(int index);
 		void	searchPrompt(void);
+		void	popBack(void);
 		
 };
 
