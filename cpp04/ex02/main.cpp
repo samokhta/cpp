@@ -4,11 +4,9 @@
 int	main()
 {
 	std::cout << std::endl << "----------Initial Tests----------" << std::endl << std::endl;
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	//const Animal j;
+	//const Animal i;
 
-	delete j;
-	delete i;
 	std::cout << std::endl << "----------Array Construction----------" << std::endl << std::endl;
 
 	int	nbr = 4;
