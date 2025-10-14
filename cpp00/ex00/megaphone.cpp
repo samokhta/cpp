@@ -1,19 +1,20 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 #include <cctype>
 
 void    print_args(int argc, char **argv)
 {
-    int i = 1;
     std::string curr_arg;
 
-    while (i < argc)
+    for (int i = 1; i < argc; i++)
     {
         curr_arg = argv[i];
-        std::transform(curr_arg.begin(), curr_arg.end(), curr_arg.begin(), ::toupper);
+        for (size_t j = 0; j < curr_arg.length(); j++) 
+		{
+        	if (curr_arg[j] >= 'a' && curr_arg[j] <= 'z')
+        	    curr_arg[j] = curr_arg[j] - 32;
+    	}
         std::cout << curr_arg;
-        i++;
     }
     std::cout << std::endl;
 }
