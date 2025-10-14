@@ -17,6 +17,8 @@ int main()
 			book.addCommand();
 		if (command == "SEARCH")
 			book.searchCommand();
+		if (command == "FILL")
+			book.fillCommand();
 	}
 	std::cout << "Exiting..." << std::endl;
 	return (0);

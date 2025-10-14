@@ -15,7 +15,7 @@ class	Contact
 		std::string	_phoneNumber;
 	public:
 		Contact();
-		Contact(Contact &other);
+		Contact &operator=(Contact &other);
 		std::string	getFirstName();
 		std::string	getLastName();
 		std::string	getNickname();

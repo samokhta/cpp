@@ -8,13 +8,14 @@ Contact::Contact()
     this->_secret = "";
 }
 
-Contact::Contact(Contact &other)
+Contact &Contact::operator=(Contact &other)
 {
     this->_firstName = other._firstName;
     this->_lastName = other._lastName;
     this->_nickname = other._nickname;
     this->_secret = other._secret;
     this->_phoneNumber = other._phoneNumber;
+	return (*this);
 }
 
 std::string	Contact::getFirstName() { return this->_firstName; }
