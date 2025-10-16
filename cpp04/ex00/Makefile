@@ -13,10 +13,10 @@ OBJ = $(addsuffix .o, $(FILES))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	g++ $(FLAGS) $(OBJ) -o $(NAME)
+	c++ $(FLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ): $(SRC)
-	g++ $(FLAGS) -c $(SRC)
+	c++ $(FLAGS) -c $(SRC)
 
 clean:
 	rm -f $(OBJ)
