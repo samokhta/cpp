@@ -66,11 +66,12 @@ void	PhoneBook::searchPrompt(void)
 std::string	PhoneBook::addPrompt(std::string prompt)
 {
 	std::string	input;
+	int			isNull = 1;
     while (1)
     {
         std::cout << prompt;
         std::getline(std::cin, input);
-        if (!input.empty() || !std::cin)
+        if (!input.empty() || !std::cin || isNull == 0)
             break ;
         else
             continue ;

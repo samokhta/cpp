@@ -11,8 +11,8 @@ void    print_args(int argc, char **argv)
         curr_arg = argv[i];
         for (size_t j = 0; j < curr_arg.length(); j++) 
 		{
-        	if (curr_arg[j] >= 'a' && curr_arg[j] <= 'z')
-        	    curr_arg[j] = curr_arg[j] - 32;
+        	if (islower(curr_arg[j]))
+        	    curr_arg[j] = toupper(curr_arg[j]);
     	}
         std::cout << curr_arg;
     }
