@@ -14,7 +14,7 @@ void	replaceString(std::ofstream &ofs, std::string fileContents, char *string1, 
 		{
 			fileContents.erase(i, s1.length());
 			fileContents.insert(i, s2);
-			i += s2.length();
+			std::cout << fileContents[i] << std::endl;
 		}
 		i++;
 	}
