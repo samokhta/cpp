@@ -33,9 +33,9 @@ public:
 	bool operator<( const Fixed &rhs ) const;
 
 	//increment operators
-	Fixed	&operator++();
+	Fixed	&operator++(); //pre increment
 	Fixed	&operator--();
-	Fixed	operator++( int );
+	Fixed	operator++( int ); //post increment
 	Fixed	operator--( int );
 
 	//member functions

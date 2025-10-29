@@ -46,10 +46,7 @@ Fixed &Fixed::operator=( const Fixed& rhs )
 
 Fixed Fixed::operator+(const Fixed &rhs) const
 {
-	Fixed	result;
-
-	result._value = this->_value + rhs.getRawBits();
-	return (result);
+	return (this->toFloat() + rhs.toFloat());
 }
 
 Fixed Fixed::operator-(const Fixed &rhs) const
@@ -62,18 +59,12 @@ Fixed Fixed::operator-(const Fixed &rhs) const
 
 Fixed Fixed::operator*(const Fixed &rhs) const
 {
-	Fixed	result;
-
-	result._value = this->_value * rhs.getRawBits();
-	return (result);
+	return (this->toFloat() * rhs.toFloat());
 }
 
 Fixed Fixed::operator/(const Fixed &rhs) const
 {
-	Fixed	result;
-
-	result._value = this->_value / rhs.getRawBits();
-	return (result);
+	return (this->toFloat() / rhs.toFloat());
 }
 
 
@@ -129,7 +120,7 @@ bool Fixed::operator<( const Fixed &rhs ) const
 
 
 //increment operators
-Fixed	&Fixed::operator++()
+Fixed	&Fixed::operator++() //pre increment
 {
 	this->_value++;
 	return (*this);
@@ -141,9 +132,10 @@ Fixed	&Fixed::operator--()
 	return (*this);
 }
 
-Fixed	Fixed::operator++( int )
+Fixed	Fixed::operator++( int ) //post increment
 {
 	Fixed	temp;
+	temp = *this;
 	this->_value++;
 	return (temp);	
 }
