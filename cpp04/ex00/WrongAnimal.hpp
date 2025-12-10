@@ -8,12 +8,11 @@ class WrongAnimal
         WrongAnimal(void);
         WrongAnimal(const WrongAnimal& other);
         WrongAnimal &operator=(const WrongAnimal &other);
-        virtual ~WrongAnimal();
+        ~WrongAnimal();
 		void	makeSound() const;
-		virtual std::string	getType() const;
+		std::string	getType() const;
 	protected:
 		std::string	type;
 };
 
 #endif
-

@@ -4,9 +4,12 @@
 int	main()
 {
 	std::cout << std::endl << "----------Initial Tests----------" << std::endl << std::endl;
-	//const Animal j;
-	//const Animal i;
+	//const Animal* test = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 
+	delete j;
+	delete i;
 	std::cout << std::endl << "----------Array Construction----------" << std::endl << std::endl;
 
 	int	nbr = 4;
@@ -20,9 +23,6 @@ int	main()
 		else
 			Animals[i] = new Cat();
 	}
-	std::cout << std::endl << "----------Array Destruction----------" << std::endl << std::endl;
-	for (int i = 0; i < nbr; ++i)
-	delete Animals[i];
 
 	std::cout << std::endl << "----------Dog Tests----------" << std::endl << std::endl;
 
@@ -68,5 +68,17 @@ int	main()
 	std::cout << "	comparing newCat and copyCat ideas again" << std::endl;
 	std::cout << "newCat idea 42: " << newCat->getIdea(42) << std::endl;
 	std::cout << "copyCat idea 42: " << copyCat->getIdea(42) << std::endl << std::endl;
+
+
+	std::cout << std::endl << "----------Array/Object Destruction----------" << std::endl << std::endl;
+	for (int i = 0; i < nbr; ++i)
+		delete Animals[i];
+
+	delete newDog;
+	delete copyDog;
+
+	delete newCat;
+	delete copyCat;
+
 	return 0;
 }

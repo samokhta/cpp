@@ -22,9 +22,6 @@ int	main()
 		else
 			Animals[i] = new Cat();
 	}
-	std::cout << std::endl << "----------Array Destruction----------" << std::endl << std::endl;
-	for (int i = 0; i < nbr; ++i)
-	delete Animals[i];
 
 	std::cout << std::endl << "----------Dog Tests----------" << std::endl << std::endl;
 
@@ -70,5 +67,17 @@ int	main()
 	std::cout << "	comparing newCat and copyCat ideas again" << std::endl;
 	std::cout << "newCat idea 42: " << newCat->getIdea(42) << std::endl;
 	std::cout << "copyCat idea 42: " << copyCat->getIdea(42) << std::endl << std::endl;
+
+
+	std::cout << std::endl << "----------Array/Object Destruction----------" << std::endl << std::endl;
+	for (int i = 0; i < nbr; ++i)
+		delete Animals[i];
+
+	delete newDog;
+	delete copyDog;
+
+	delete newCat;
+	delete copyCat;
+
 	return 0;
 }
