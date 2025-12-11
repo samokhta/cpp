@@ -1,18 +1,16 @@
 #include "Animal.hpp"
 
 // Default constructor
-Animal::Animal(void)
+Animal::Animal(void) : type("Animal")
 {
     std::cout << "Animal: Default constructor called" << std::endl;
-	type = "Animal";
     return ;
 }
 
 // Copy constructor
-Animal::Animal(const Animal &other)
+Animal::Animal(const Animal &other) : type(other.type)
 {
     std::cout << "Animal: Copy constructor called" << std::endl;
-    *this = other;
     return ;
 }
 
@@ -20,7 +18,7 @@ Animal::Animal(const Animal &other)
 Animal &Animal::operator=(const Animal &other)
 {
     std::cout << "Animal: Assignment operator called" << std::endl;
-    (void) other;
+    type = other.type;
     return (*this);
 }
 

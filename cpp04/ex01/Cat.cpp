@@ -1,11 +1,10 @@
 #include "Cat.hpp"
 
 // Default constructor
-Cat::Cat(void)
+Cat::Cat(void) : catBrain(new Brain())
 {
     std::cout << "Cat: Default constructor called" << std::endl;
 	type = "Cat";
-    catBrain = new Brain();
     return ;
 }
 
