@@ -67,6 +67,6 @@ std::ostream	&operator<<(std::ostream& stream, Form& rhs)
 	stream << "Name: " << rhs.getName() << std::endl;
 	stream << "Signed: " << rhs.getSigned() << std::endl;
 	stream << "Sign Grade: " << rhs.getSignGrade() << std::endl;
-	stream << "Execution Grade: " << rhs.getExecGrade() << std::endl;
+	stream << "Execution Grade: " << rhs.getExecGrade();
 	return (stream);
 }
