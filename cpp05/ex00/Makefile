@@ -1,11 +1,8 @@
-NAME = Animals
+NAME = Bureaucrats
 FLAGS = -Wall -Werror -Wextra -std=c++98
 FILES = main \
-		Animal \
-		Cat \
-		Dog \
-		WrongAnimal \
-		WrongCat \
+		Bureaucrat \
+
 
 SRC = $(addsuffix .cpp, $(FILES))
 OBJ = $(addsuffix .o, $(FILES))
