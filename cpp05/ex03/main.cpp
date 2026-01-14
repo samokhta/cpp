@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -13,13 +14,40 @@ int	main()
 	PresidentialPardonForm	ppf("maria");
 	RobotomyRequestForm		rrf("maria");
 
-	std::cout << std::endl << "Garice, grade 150-----------------------------------" << std::endl << std::endl;
-	garice.signForm(scf);
-	garice.executeForm(scf);
-	garice.signForm(ppf);
-	garice.executeForm(ppf);
-	garice.signForm(rrf);
-	garice.executeForm(rrf);
+	Intern someRandomIntern;
+	AForm*	rrfIntern;
+	AForm*	ppfIntern;
+	AForm*	scfIntern;
+	rrfIntern = someRandomIntern.makeForm("error test", "Bender");
+	rrfIntern = someRandomIntern.makeForm("rrf", "Bender");
+	ppfIntern = someRandomIntern.makeForm("ppf", "Bender");
+	scfIntern = someRandomIntern.makeForm("scf", "Bender");
+	if (rrfIntern)
+	{
+		jim.signForm(*rrfIntern);
+		jim.executeForm(*rrfIntern);
+		delete rrfIntern;
+	}
+	if (ppfIntern)
+	{
+		jim.signForm(*ppfIntern);
+		jim.executeForm(*ppfIntern);
+		delete ppfIntern;
+	}
+	if (scfIntern)
+	{
+		jim.signForm(*scfIntern);
+		jim.executeForm(*scfIntern);
+		delete scfIntern;
+	}
+
+	//std::cout << std::endl << "Garice, grade 150-----------------------------------" << std::endl << std::endl;
+	//garice.signForm(scf);
+	//garice.executeForm(scf);
+	//garice.signForm(ppf);
+	//garice.executeForm(ppf);
+	//garice.signForm(rrf);
+	//garice.executeForm(rrf);
 
 	//std::cout << std::endl << "Noé, grade 75-----------------------------------" << std::endl << std::endl;
 	//noe.signForm(scf);

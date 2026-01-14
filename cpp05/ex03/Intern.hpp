@@ -13,6 +13,14 @@ class Intern
 		Intern &operator=(const Intern& other);
 		~Intern();
 		AForm *makeForm(std::string type, std::string target);
+		public:
+    class UnknownFormException : public std::exception
+    {
+        const char* what() const throw()
+        {
+            return "Unknown form name";
+        }
+    };
 	private:
 		AForm *makePPF(std::string target) const;
 		AForm *makeRRF(std::string target) const;

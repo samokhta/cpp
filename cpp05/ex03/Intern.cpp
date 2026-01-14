@@ -1,8 +1,8 @@
 #include "Intern.hpp"
 
 Intern::Intern() {}
-Intern::Intern(const Intern& other) {}
-Intern &Intern::operator=(const Intern& other) {}
+Intern::Intern(const Intern& other) { (void)other; }
+Intern &Intern::operator=(const Intern& other) { (void)other; return *this; }
 Intern::~Intern() {}
 
 AForm*	Intern::makePPF(std::string target) const { return new PresidentialPardonForm(target); }
@@ -19,10 +19,10 @@ AForm*	Intern::makeForm(std::string type, std::string target)
 	for (int i = 0; i < 3; ++i) {
 		if (type == forms[i])
 		{
-			std::cout << "Intern creates <form>" << std::endl;
+			std::cout << "Intern creates " << forms[i] << std::endl;
 			return ((this->*functions[i])(target));
 		}
 	}
-	std::cout << "Error: form type " << type << " does not exist" << std::endl;
+	std::cout << "Error: form type \"" << type << "\" does not exist" << std::endl;
 	return NULL;
 }
