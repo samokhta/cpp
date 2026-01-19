@@ -11,7 +11,7 @@
 		ScalarConverter	&operator=(const ScalarConverter& other);
 		~ScalarConverter();
 	public:
-		static void	convert(std::string num);
+		static void	convert(std::string s);
 	};
 
 #endif
