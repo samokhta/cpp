@@ -14,7 +14,7 @@
 		ScalarConverter(const ScalarConverter& other);
 		ScalarConverter	&operator=(const ScalarConverter& other);
 		~ScalarConverter();
-		enum{ ERROR, CHAR, INT, FLOAT, DOUBLE };
+
 	public:
 		static void	convert(std::string s);
 	};

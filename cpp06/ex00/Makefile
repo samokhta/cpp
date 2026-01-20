@@ -1,4 +1,4 @@
-NAME = Conversion
+NAME = convert
 FLAGS = -Wall -Werror -Wextra -std=c++98
 FILES = main \
 		ScalarConverter \

@@ -1,17 +1,10 @@
 #include "ScalarConverter.hpp"
-
+#include <cmath>
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter& other) { (void)other; }
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter& other) { (void)other; return *this; }
 ScalarConverter::~ScalarConverter() {}
 
-//exceptions: -inff/+inff/nanf, -inf/+inf/nan
-//	double	nbr; //on utilise double pour eviter les downcasts puisque c le type le plus complexe
-//	size_t	idx; //pour passer dans std::stod
-//	int		type;
-
-//check si s est un char non numerique(ex: 'a', '@', '!', etc.), si oui cast le dans nbr
-//sinon convertis s dans double avec std::stod et verifie que l'input est bien valide
 void	ScalarConverter::convert(std::string s)
 {
 	double	nbr;
@@ -26,4 +19,30 @@ void	ScalarConverter::convert(std::string s)
 		std::cerr << "Invalid input" << std::endl;
 		return ;
 	}
+
+	std::cout << "char: ";
+	if (std::isnan(nbr) || std::isinf(nbr))
+		std::cout << "Impossible" << std::endl;
+	else if (isprint(static_cast<char>(nbr)))
+		std::cout << "'" << static_cast<char>(nbr) << "'" << std::endl;
+	else
+		std::cout << "Non displayable" << std::endl;
+
+	std::cout << "int: ";
+	if (std::isnan(nbr) || nbr > INT_MAX || nbr < INT_MIN)
+		std::cout << "Impossible" << std::endl;
+	else
+		std::cout << static_cast<int>(nbr) << std::endl;
+
+	std::cout << "float: ";
+	std::cout << static_cast<float>(nbr);
+	if (nbr - static_cast<int>(nbr) == 0)
+		std::cout << ".0";
+	std::cout << "f" << std::endl;
+
+	std::cout << "double: ";
+	std::cout << nbr;
+	if (nbr - static_cast<int>(nbr) == 0)
+		std::cout << ".0";
+	std::cout << std::endl;
 }
