@@ -1,7 +1,11 @@
 #ifndef SCALAR_HPP
 # define SCALAR_HPP
+
 # include <string>
 # include <iostream>
+# include <iomanip>
+# include <climits>
+# include <cmath>
 
 	class ScalarConverter
 	{
@@ -10,6 +14,7 @@
 		ScalarConverter(const ScalarConverter& other);
 		ScalarConverter	&operator=(const ScalarConverter& other);
 		~ScalarConverter();
+		enum{ ERROR, CHAR, INT, FLOAT, DOUBLE };
 	public:
 		static void	convert(std::string s);
 	};
