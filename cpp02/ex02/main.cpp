@@ -13,6 +13,8 @@ int main( void )
 	
 	std::cout << "b = " << b << std::endl;
 	std::cout << b + a + 5 << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "b = " << b << std::endl;
 	std::cout << b - a << std::endl;
 	std::cout << b / 2 << std::endl << std::endl;
 

@@ -6,6 +6,15 @@
 # include <climits>
 # include <cmath>
 
+	enum Type
+	{
+		CHAR,
+		INT,
+		FLOAT,
+		DOUBLE,
+		ERROR
+	};
+
 	class ScalarConverter
 	{
 	private:
