@@ -1,5 +1,5 @@
 #include "ScalarConverter.hpp"
-//TODO : remove .0/.0f for inf/nan
+
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter& other) { (void)other; }
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter& other) { (void)other; return *this; }
@@ -72,7 +72,7 @@ static void	intConvert(std::string s)
 	if (isprint(static_cast<char>(i)))
 		std::cout << "char: \'" << static_cast<char>(i) << "\'" << std::endl;
 	else if (i < 0 || i > 127)
-		std::cout << "char: Impossible (Out of Bounds)" << std::endl;
+		std::cout << "char: Impossible" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
 	std::cout << "int: " << i << std::endl;
@@ -89,7 +89,7 @@ static void	floatConvert(std::string s)
 	else if (isprint(static_cast<char>(f)))
 		std::cout << "char: \'" << static_cast<char>(f) << "\'" << std::endl;
 	else if (static_cast<int>(f) < 0 || static_cast<int>(f) > 127)
-		std::cout << "char: Impossible (Out of Bounds)" << std::endl;
+		std::cout << "char: Impossible" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
 
@@ -97,8 +97,16 @@ static void	floatConvert(std::string s)
 		std::cout << "int: Impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(f) << std::endl;
-	std::cout << "float: " << f << ".0f" << std::endl;
-	std::cout << "double: " << static_cast<double>(f) << ".0" << std::endl;
+	if (trunc(f) == f && !std::isinf(f))
+	{
+		std::cout << "float: " << f << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(f) << ".0" << std::endl;
+	}
+	else
+	{
+		std::cout << "float: " << f << "f" << std::endl;
+		std::cout << "double: " << static_cast<double>(f) << std::endl;
+	}
 }
 
 static void	doubleConvert(std::string s)
@@ -110,7 +118,7 @@ static void	doubleConvert(std::string s)
 	else if (isprint(static_cast<char>(d)))
 		std::cout << "char: \'" << static_cast<char>(d) << "\'" << std::endl;
 	else if (static_cast<int>(d) < 0 || static_cast<int>(d) > 127)
-		std::cout << "char: Impossible (Out of Bounds)" << std::endl;
+		std::cout << "char: Impossible" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
 
@@ -118,8 +126,16 @@ static void	doubleConvert(std::string s)
 		std::cout << "int: Impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
-	std::cout << "float: " << static_cast<float>(d) << ".0f" << std::endl;
-	std::cout << "double: " << d << ".0" << std::endl;
+	if (trunc(d) == d && !std::isinf(d))
+	{
+		std::cout << "float: " << d << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(d) << ".0" << std::endl;
+	}
+	else
+	{
+		std::cout << "float: " << d << "f" << std::endl;
+		std::cout << "double: " << static_cast<double>(d) << std::endl;
+	}
 }
 
 void	ScalarConverter::convert(std::string s)
