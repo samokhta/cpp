@@ -1,4 +1,4 @@
-NAME = functions
+NAME = iter
 FLAGS = -Wall -Werror -Wextra -std=c++98
 FILES = main
 
