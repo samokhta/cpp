@@ -2,7 +2,6 @@
 
 Base * generate(void)
 {
-	srand(time(0));
 	int	random = rand() % 3;
 
 	std::cout << random << std::endl;
@@ -18,21 +17,39 @@ void identify(Base* p)
 {
 	if (dynamic_cast<A*>(p))
 		std::cout << "p is an A object" << std::endl;
-	if (dynamic_cast<B*>(p))
+	else if (dynamic_cast<B*>(p))
 		std::cout << "p is a B object" << std::endl;
-	if (dynamic_cast<C*>(p))
+	else if (dynamic_cast<C*>(p))
 		std::cout << "p is a C object" << std::endl;
+	else
+		std::cout << "Invalid type" << std::endl;
 }
 
 void identify(Base& p)
 {
 	try
 	{
-		/* code */
+		dynamic_cast<A&>(p);
+		std::cout << "p is an A object" << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-	}
-	
+		try
+		{
+			dynamic_cast<B&>(p);
+			std::cout << "p is a B object" << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			try
+			{
+				dynamic_cast<C&>(p);
+				std::cout << "p is a C object" << std::endl;
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << "Invalid type" << std::endl;
+			};
+		}	
+	}	
 }

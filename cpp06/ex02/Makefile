@@ -1,4 +1,4 @@
-NAME = serialization
+NAME = identify
 FLAGS = -Wall -Werror -Wextra -std=c++98
 FILES = main \
 		BaseABC \
