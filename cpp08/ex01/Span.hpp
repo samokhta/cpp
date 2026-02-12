@@ -10,6 +10,7 @@ class Span
 	private:
 		Span();
 		unsigned int		_size;
+		unsigned int		_used;
 		std::vector<int>	_vect;
 	public:
 		~Span();
@@ -23,6 +24,7 @@ class Span
 		unsigned int	longestSpan();
 
 		void addNumberRange(std::vector<int>::iterator listBegin, std::vector<int>::iterator listEnd);
+		void addNumberRange(unsigned int listBegin, unsigned int listEnd);
 
 		class ContainerFullException : public std::exception
 		{

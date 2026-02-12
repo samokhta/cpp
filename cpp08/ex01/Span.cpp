@@ -24,7 +24,10 @@ void	Span::printSpan()
 void	Span::addNumber(int n)
 {
 	if (_vect.size() < _size)
+	{
 		_vect.push_back(n);
+		_used++;
+	}
 	else
 		throw ContainerFullException();
 	
@@ -51,4 +54,19 @@ unsigned int	Span::longestSpan()
 }
 
 void Span::addNumberRange(std::vector<int>::iterator listBegin, std::vector<int>::iterator listEnd)
-{}
+{
+	while (listBegin != listEnd)
+	{
+		addNumber(*listBegin);
+		listBegin++;
+	}
+}
+
+void Span::addNumberRange(unsigned int listBegin, unsigned int listEnd)
+{
+	while (listBegin <= listEnd)
+	{
+		addNumber(listBegin);
+		listBegin++;
+	}
+}
