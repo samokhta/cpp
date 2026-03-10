@@ -2,6 +2,10 @@
 
 int	main(int argc, char **argv)
 {
-	//parse la database
+	Database	database;
+	Database	input;
+
+	database.parseDatabase();
+	
 	return 0;
 }
