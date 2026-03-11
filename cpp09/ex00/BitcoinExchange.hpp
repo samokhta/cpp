@@ -15,8 +15,10 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange& other);
 		BitcoinExchange	&operator=(const BitcoinExchange& other);
 
-		bool	isValidDate(std::string& date) const;
-		bool	isValidNumber(std::string& number) const;
+		bool	isValidDate(const std::string& date) const;
+		bool	isValidAmount(const std::string& amount) const;
+		double	getRate(const std::string& date) const;
+		void	exchange(const std::string& date, const double& amount) const;
 
 	public:
 		BitcoinExchange();
