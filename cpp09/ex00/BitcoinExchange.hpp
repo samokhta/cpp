@@ -7,18 +7,22 @@
 #include <iostream>
 #include <cstdlib>
 
-class Database
+class BitcoinExchange
 {
 	private:
 		std::map<std::string, double>	_database;
 
+		BitcoinExchange(const BitcoinExchange& other);
+		BitcoinExchange	&operator=(const BitcoinExchange& other);
+
+		bool	isValidDate(std::string& date) const;
+		bool	isValidNumber(std::string& number) const;
+
 	public:
-		Database();
-		Database(const Database& other);
-		Database	&operator=(const Database& other);
-		~Database();
+		BitcoinExchange();
+		~BitcoinExchange();
 		void	parseDatabase();
-		void	parseInput(char *file);
+		void	processInput(char *filename) const;
 		const	std::map<std::string, double>	&getDatabase() const;
 };
 
