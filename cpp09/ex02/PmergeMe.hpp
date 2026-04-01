@@ -21,6 +21,7 @@ class VectSort
 		VectSort	&operator=(const VectSort& other);
 
 		void	merge();
+		void	swapPair(int i, int j);
 		void	insert();
 		int		jacobsthal();
 

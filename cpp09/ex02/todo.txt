@@ -1,0 +1,3 @@
+-jacobsthal
+-insert
+-what to do with left out pairs
