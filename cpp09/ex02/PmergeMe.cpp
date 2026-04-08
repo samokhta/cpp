@@ -46,6 +46,45 @@ void	VectSort::swapPair(int i, int j)
 		len--;
 	}	
 }
+
+void	VectSort::initSequences(std::vector<int> &main, std::vector<int> &pend)
+{
+	size_t	maxSize = _array.size() / _order;
+	size_t	idx = _order * 2;
+	bool	insert = true;
+
+	for (size_t i = 0; i < _order * 2; i++) //push a1 et b1 dans le main
+		main.push_back(_array[i]);
+	while (idx < maxSize * _order)
+	{
+		if (insert == true)
+		{
+			//push dans pend
+			for (size_t i = 0; i < _order; i++)
+				pend.push_back(_array[i + idx]);
+			insert = false;
+		}
+		else
+		{
+			//push dans main
+			for (size_t i = 0; i < _order; i++)
+				main.push_back(_array[i + idx]);
+			insert = true;
+		}
+		idx += _order;
+	}
+}
+
+void	VectSort::insert()
+{
+	std::vector<int>	main;
+	std::vector<int>	pend;
+
+	initSequences(main, pend);
+	//find out comment implementer la fonction jacobsthal (est-ce que je call a chaque fois que jai besoin dun nombre ou je fais un vector avec tous les nombres necessaires)
+	//find out comment exclure les paires que t'as pas besoin de comparer
+}
+
 void	VectSort::merge()
 {
 	if ((size_t)_order * 2 > _array.size())

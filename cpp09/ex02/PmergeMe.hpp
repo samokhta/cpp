@@ -22,6 +22,7 @@ class VectSort
 
 		void	merge();
 		void	swapPair(int i, int j);
+		void	initSequences(std::vector<int> &main, std::vector<int> &pend);
 		void	insert();
 		int		jacobsthal();
 
