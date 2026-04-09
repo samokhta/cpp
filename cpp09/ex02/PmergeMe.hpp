@@ -7,6 +7,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <ctime>
+#include <cmath>
 #include <cstdlib>
 
 class VectSort
@@ -24,7 +25,8 @@ class VectSort
 		void	swapPair(int i, int j);
 		void	initSequences(std::vector<int> &main, std::vector<int> &pend);
 		void	insert();
-		int		jacobsthal();
+		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, int elemIdx, int min, int max);
+		long	jacobsthal(long n);
 
 	public:
 		VectSort(int argc, char **argv);
