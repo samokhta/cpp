@@ -9,8 +9,10 @@ int	main(int argc, char **argv)
 		return 1;
 	}
 	VectSort	vec(argc, argv);
+	std::cout << "starting sequence: ";
 	vec.print();
 	vec.sort();
+	std::cout << "sorted sequence: ";
 	vec.print();
 	return 0;
 }

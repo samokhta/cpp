@@ -25,7 +25,8 @@ class VectSort
 		void	swapPair(int i, int j);
 		void	initSequences(std::vector<int> &main, std::vector<int> &pend);
 		void	insert();
-		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, int elemIdx, int min, int max);
+		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, size_t elemIdx, int min, int max);
+		void	printVec(std::vector<int> &vec);
 		unsigned long	jacobsthal(long n);
 
 	public:
