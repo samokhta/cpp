@@ -14,7 +14,7 @@ class VectSort
 {
 	private:
 		std::vector<int>	_array;
-		int					_order;
+		size_t				_order;
 		clock_t				_time;
 
 		VectSort();
@@ -26,7 +26,7 @@ class VectSort
 		void	initSequences(std::vector<int> &main, std::vector<int> &pend);
 		void	insert();
 		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, int elemIdx, int min, int max);
-		long	jacobsthal(long n);
+		unsigned long	jacobsthal(long n);
 
 	public:
 		VectSort(int argc, char **argv);
