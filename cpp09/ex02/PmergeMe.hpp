@@ -23,7 +23,8 @@ class VectSort
 
 		void	merge();
 		void	swapPair(int i, int j);
-		void	initSequences(std::vector<int> &main, std::vector<int> &pend);
+		void	initSequences(std::vector<int> &main, std::vector<int> &pend, std::vector<int>& pairIndex);
+		void	updatePair(std::vector<int>& pairIndex, size_t insertedPendIdx, size_t insertionPoint);
 		void	insert();
 		size_t	binarySearch(std::vector<int> &main, std::vector<int> &pend, size_t elemIdx, size_t min, size_t max);
 		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, size_t elemIdx, size_t min, size_t max);

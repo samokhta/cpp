@@ -87,8 +87,9 @@ void		VectSort::binaryInsert(std::vector<int> &main, std::vector<int> &pend, siz
 }
 
 //push les elements necessaires dans le main et le pend (ax + b1 dans main, le reste des b dans pend)
+//remplit pairIndex: pairIndex[0] = 0, pairIndex[1] = l'index de l'element pair a pend[(1 * _order) - 1] (exemple: si b5 est le premier element de pend alors pairIndex[1] va donner l'index de a5)
 //bug: supprime les elements qui ne peuvent pas former de paire, maybe fix en faisant un vec trash?
-void	VectSort::initSequences(std::vector<int> &main, std::vector<int> &pend)
+void	VectSort::initSequences(std::vector<int> &main, std::vector<int> &pend, std::vector<int>& pairIndex)
 {
 	std::cout << std::endl << "initSequences() call " << std::endl;
 	size_t	maxSize = _array.size() / _order;
@@ -117,6 +118,12 @@ void	VectSort::initSequences(std::vector<int> &main, std::vector<int> &pend)
 		}
 		idx += _order;
 	}
+	pairIndex[0] = 0;
+	for (size_t i = 1; i < pend.size() / _order; i++)	//je crois ca assigne correctement???
+		pairIndex[i] = (_order * 2) + (_order * i) - 1;
+	
+
+
 	std::cout << "_order: " << _order << std::endl;
 	std::cout << "maxSize * _order: " << maxSize * _order << std::endl;
 	std::cout << "_array: "; print();
@@ -127,32 +134,49 @@ void	VectSort::initSequences(std::vector<int> &main, std::vector<int> &pend)
 	std::cout << "pend.size(): " << pend.size() << std::endl;
 	std::cout << "initSequences() return "<< std::endl << std::endl;
 }
-//initialise le main/pend, insert correctement chaque element du pend de sorte a ce que les groupes de main soient toujours sorted
-//traque le nombre d'insertions et l'index de ax en fonction de quel element tu insere (comme ca tu peux limiter la zone de recherche)
+
+void	VectSort::updatePair(std::vector<int>& pairIndex, size_t insertedPendIdx, size_t insertionPoint)
+{
+
+}
+
+//risque de casser a cause des calculs d'index (est-ce que le premier groupe est index 0 ou index 1)
+//dans certaines operations faut faire (x * index) - 1 pour compenser le fait que ton array commence a index 0
 void	VectSort::insert()
 {
 	std::cout << "insert() call" << std::endl;
 	std::vector<int>	main;
 	std::vector<int>	pend;
-	int	n = 2;
+	std::vector<int>	pairIndex;
+	bool	isOdd = pend.size() % 2 == 0 ? true : false;//idk about that syntax
+	size_t	n = 2;
+	size_t	current_jacobsthal = jacobsthal(n); //3
+	size_t	previous_jacobsthal = jacobsthal(n - 1); //1
+	size_t	jacobsthal_diff = current_jacobsthal - previous_jacobsthal; //2
+	size_t	inserted_amount = 0;
 
-	initSequences(main, pend);
-	//std::cout << "jacobsthal(" << n << "): " << jacobsthal(n) << std::endl;
-	while (!pend.empty())
+	initSequences(main, pend, pairIndex);
+	while (pend.size() / _order >= jacobsthal_diff)
 	{
-		if (jacobsthal(n) * _order <= pend.size())
+		current_jacobsthal = jacobsthal(n);
+		previous_jacobsthal = jacobsthal(n - 1);
+		jacobsthal_diff = current_jacobsthal - previous_jacobsthal;
+		size_t	bound = current_jacobsthal + inserted_amount;
+		for (size_t i = jacobsthal_diff; i > 0; i--)
 		{
-			for (size_t i = jacobsthal(n); i >= jacobsthal(n - 1); i--)
-				binaryInsert(main, pend, (i - 1) * _order, 0, main.size());
-			n++;
+			binaryInsert(main, pend, i, 0, bound);//note: multiplier i et bound par _order dans binaryInsert(), peut etre faire bound - 1 selon si le bound c la zone de recherche pre/post insertion
+			inserted_amount++;
 		}
-		else
-		{
-			for (size_t i = 0; i < pend.size(); i += _order)
-				binaryInsert(main, pend, i, 0, main.size());
-		}
+		n++;
 	}
-	_array = main;
+	for (size_t i = pend.size() / _order; i > 0; i--)
+	{
+		
+	}
+	
+	
+	
+	
 	std::cout << "insert() return" << std::endl;
 }
 //compare les paires et les swap de sorte a ce que ax > bx
