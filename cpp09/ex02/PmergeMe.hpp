@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <deque>
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <stdexcept>
@@ -10,10 +11,12 @@
 #include <cmath>
 #include <cstdlib>
 
+# define vector	std::vector<int>
+
 class VectSort
 {
 	private:
-		std::vector<int>	_array;
+		vector				_array;
 		size_t				_order;
 		clock_t				_time;
 
@@ -23,12 +26,12 @@ class VectSort
 
 		void	merge();
 		void	swapPair(int i, int j);
-		void	initSequences(std::vector<int> &main, std::vector<int> &pend, std::vector<int>& pairIndex);
-		void	updatePair(std::vector<int>& pairIndex, size_t insertedPendIdx, size_t insertionPoint);
+		void	initSequences(vector &main, vector &pend, vector& pairIndex);
+		void	updatePair(vector& pairIndex, size_t insertedPendIdx);
 		void	insert();
-		size_t	binarySearch(std::vector<int> &main, std::vector<int> &pend, size_t elemIdx, size_t min, size_t max);
-		void	binaryInsert(std::vector<int> &main, std::vector<int> &pend, size_t elemIdx, size_t min, size_t max);
-		void	printVec(std::vector<int> &vec);
+		size_t	binarySearch(vector &main, int item, size_t min, size_t max);
+		void	binaryInsert(vector &main, vector &pend, size_t elemIdx, vector::iterator min, vector::iterator max);
+		void	printVec(vector &vec);
 		size_t	jacobsthal(long n);
 
 	public:
@@ -41,7 +44,7 @@ class VectSort
 class DequeSort
 {
 	private:
-		std::vector<int>	_array;
+		vector	_array;
 		int					_order;
 		clock_t				_time;
 
