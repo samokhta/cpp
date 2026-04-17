@@ -1,6 +1,20 @@
 #include "PmergeMe.hpp"
 #include <stdio.h>
 
+bool	checkArgv(int argc, char **argv)
+{
+	for (int i = 1; i < argc; i++)
+	{
+		std::string	str(argv[i]);
+		for (size_t j = 0; j < str.size(); j++)
+		{
+			if (!isdigit(str[j])) 
+				return false;
+		}
+	}
+	return true;
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc < 3 || checkArgv(argc, argv) == false)
