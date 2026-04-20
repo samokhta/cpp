@@ -65,40 +65,33 @@ void	VectSort::printVec(vector &vec)
 
 /************************************************************/
 
-size_t		VectSort::binarySearch(vector &main, int item, size_t min, size_t max)
+size_t VectSort::binarySearch(vector &main, int item, size_t minGroup, size_t maxGroup)
 {
-	//std::cout << "binarySearch() call" << std::endl;
-	if (max <= min) //condition qui casse la recursion une fois que t'as trouve le bon index
-	{
-		//std::cout << "binarySearch() return (1)" << std::endl;
-		return (item > main[min]) ? (min + _order) : min;
-	}
-	int mid = ((min + max) / 2 / _order) * _order;//trouve un moyen d'arrondir a l'ordre le plus proche
-	if (item == main[mid])
-	{
-		//std::cout << "binarySearch() return (2)" << std::endl;
-		return mid + 1;
-	}
-	if (item > main[mid])
-	{
-		//std::cout << "binarySearch() return (3)" << std::endl;
-		return binarySearch(main, item, mid + _order, max);
-	}
-	if (mid == 0)
-	{
-		//std::cout << "binarySearch() return (4)" << std::endl;
-		return 0;
-	}
-	//std::cout << "binarySearch() return (5)" << std::endl;
-	return binarySearch(main, item, min, mid - _order);
+    if (minGroup > maxGroup)
+        return (minGroup - 1) * _order;
+
+    size_t midGroup = (minGroup + maxGroup) / 2;
+    int    midVal   = main[midGroup * _order - 1];
+
+    if (item == midVal)
+        return midGroup * _order;
+    if (item > midVal)
+    {
+        if (midGroup == maxGroup)
+            return maxGroup * _order;
+        return binarySearch(main, item, midGroup + 1, maxGroup);
+    }
+    if (midGroup == minGroup)
+        return (minGroup - 1) * _order;
+    return binarySearch(main, item, minGroup, midGroup - 1);
 }
 
 //insere un element du pend dans le main en utilisant le binary search pour trouver ou le placer
 void		VectSort::binaryInsert(vector &main, vector &pend, size_t itemIdx, vector::iterator max) //elemIdx: fin du groupe a insert
 {
-	std::cout << "binaryInsert() call" << itemIdx << std::endl;
-	size_t	maxIdx = std::distance(main.begin(), max);
-	size_t	insertIdx = binarySearch(main, pend[itemIdx], group(main, 1), maxIdx); //index auquel tu dois insert toInsert, si tu dois inserer entre le 1er et le 2eme groupe a order 4 alors insertIdx sera 4(vector::insert insert avant l'index specifie)
+	//std::cout << "binaryInsert() call" << itemIdx << std::endl;
+	size_t maxGroup  = (size_t)std::distance(main.begin(), max) / _order;
+	size_t insertIdx = binarySearch(main, pend[itemIdx], 1, maxGroup);
 	vector::iterator	position;	//insertIdx mais en iterateur aka la position dans le main ou tu vas inserer le groupe
 	vector::iterator	first;		//premier element du groupe a inserer
 	vector::iterator	last;		//dernier element du groupe a inserer
@@ -106,20 +99,20 @@ void		VectSort::binaryInsert(vector &main, vector &pend, size_t itemIdx, vector:
 	position = main.begin();
 	std::advance(position, insertIdx);
 	first = pend.begin();
-	if (itemIdx >= _order)
-		std::advance(first, group(pend, itemIdx - _order));
+	if (itemIdx + 1 >= _order)
+	    std::advance(first, itemIdx + 1 - _order);  // (7+1) - 4 = 4 → correct start
 	last = first;
-	std::advance(last, _order);
+	std::advance(last, _order);  // first + 4 → correct end
 
-	std::cout << "debug\n";
+	//std::cout << "debug\n";
 	main.insert(position, first, last); //segfault ici
 	pend.erase(first, last);
 
-	std::cout << std::endl << "main: "; printVec(main);
-	std::cout << "main.size(): " << main.size() << std::endl;
-	std::cout << "pend: "; printVec(pend);
-	std::cout << "pend.size(): " << pend.size()<< std::endl;
-	std::cout << "binaryInsert() return" << std::endl;
+	//std::cout << std::endl << "main: "; printVec(main);
+	//std::cout << "main.size(): " << main.size() << std::endl;
+	//std::cout << "pend: "; printVec(pend);
+	//std::cout << "pend.size(): " << pend.size()<< std::endl;
+	//std::cout << "binaryInsert() return" << std::endl;
 }
 
 //push les elements necessaires dans le main et le pend (ax + b1 dans main, le reste des b dans pend)
@@ -128,7 +121,7 @@ void		VectSort::binaryInsert(vector &main, vector &pend, size_t itemIdx, vector:
 //bug: supprime les elements qui ne peuvent pas former de paire, maybe fix en faisant un vec trash?
 void	VectSort::initSequences(vector &main, vector &pend, vector& leftover, vector& pairIndex)
 {
-	std::cout << std::endl << "initSequences() call " << std::endl;
+	//std::cout << std::endl << "initSequences() call " << std::endl;
 	size_t	maxSize = _array.size() / _order;
 	size_t	idx = _order * 2;
 	bool	insert = true;
@@ -168,24 +161,24 @@ void	VectSort::initSequences(vector &main, vector &pend, vector& leftover, vecto
 	}
 	else
 	{
-		std::cout << "odd element found in pend\n";
+		//std::cout << "odd element found in pend\n";
 		for (size_t i = 0; i < (pend.size() / _order) - 1; i++)
 			pairIndex.push_back(main[group(main, i + 3)]);
 	}
 
-	for (size_t i = 0; i < pairIndex.size(); i++)
-		std::cout << "pairIndex[" << i << "] = " << pairIndex[i] << std::endl; 
-	std::cout << "_order: " << _order << std::endl;
-	std::cout << "maxSize * _order: " << maxSize * _order << std::endl;
-	std::cout << "_array: "; print();
-	std::cout << "_array.size(): " << _array.size() << std::endl;
-	std::cout << "main: "; printVec(main);
-	std::cout << "main.size(): " << main.size() << std::endl;
-	std::cout << "pend: "; printVec(pend);
-	std::cout << "pend.size(): " << pend.size() /_order << std::endl;
-	std::cout << "leftover: "; printVec(leftover);
-	std::cout << "leftover.size(): " << leftover.size() /_order << std::endl;
-	std::cout << "initSequences() return "<< std::endl << std::endl;
+	//for (size_t i = 0; i < pairIndex.size(); i++)
+		//std::cout << "pairIndex[" << i << "] = " << pairIndex[i] << std::endl; 
+	//std::cout << "_order: " << _order << std::endl;
+	//std::cout << "maxSize * _order: " << maxSize * _order << std::endl;
+	//std::cout << "_array: "; print();
+	//std::cout << "_array.size(): " << _array.size() << std::endl;
+	//std::cout << "main: "; printVec(main);
+	//std::cout << "main.size(): " << main.size() << std::endl;
+	//std::cout << "pend: "; printVec(pend);
+	//std::cout << "pend.size(): " << pend.size() /_order << std::endl;
+	//std::cout << "leftover: "; printVec(leftover);
+	//std::cout << "leftover.size(): " << leftover.size() /_order << std::endl;
+	//std::cout << "initSequences() return "<< std::endl << std::endl;
 }
 
 
@@ -194,7 +187,7 @@ void	VectSort::initSequences(vector &main, vector &pend, vector& leftover, vecto
 //dans certaines operations faut faire (x * index) - 1 pour compenser le fait que ton array commence a index 0
 void	VectSort::insert()
 {
-	std::cout << "insert() call" << std::endl;
+	//std::cout << "insert() call" << std::endl;
 	vector	main;
 	vector	pend;
 	vector	leftover;
@@ -221,12 +214,12 @@ void	VectSort::insert()
 		binaryInsert(main, pend, pend.size() - 1, main.end()); //claude propose binaryInsert(main, pend, group(pend, pend.size() / _order), main.end());
 	_array = main;
 	_array.insert(_array.end(), leftover.begin(), leftover.end());
-	std::cout << "insert() return" << std::endl;
+	//std::cout << "insert() return" << std::endl;
 }
 //compare les paires et les swap de sorte a ce que ax > bx
 void	VectSort::merge()
 {
-	std::cout << "merge() call" << std::endl;
+	//std::cout << "merge() call" << std::endl;
 	if ((size_t)_order * 2 > _array.size())
 		return ;
 
@@ -244,7 +237,7 @@ void	VectSort::merge()
 	merge();
 	_order /= 2;
 	insert();
-	std::cout << "merge() return" << std::endl;
+	//std::cout << "merge() return" << std::endl;
 	//print();
 }
 
