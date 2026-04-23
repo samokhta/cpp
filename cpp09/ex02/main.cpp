@@ -23,10 +23,17 @@ int	main(int argc, char **argv)
 		return 1;
 	}
 	VectSort	vec(argc, argv);
-	std::cout << "starting sequence: ";
+	DequeSort	deq(argc, argv);
+	std::cout << "Before:	";
 	vec.print();
+
 	vec.sort();
-	std::cout << "sorted sequence: ";
+	deq.sort();
+
+	std::cout << "After:	";
 	vec.print();
+
+	std::cout << std::fixed << "time to process a range of " << argc - 1 << " elements with std::vector:	" << (double)vec.getTime() / CLOCKS_PER_SEC << "sec" << std::endl;
+	std::cout << std::fixed << "time to process a range of " << argc - 1 << " elements with std::deque:		" << (double)deq.getTime() / CLOCKS_PER_SEC << "sec" << std::endl;
 	return 0;
 }
